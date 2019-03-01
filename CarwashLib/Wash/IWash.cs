@@ -8,6 +8,6 @@ namespace CarwashLib
     interface IWash<T>
     {
         Task<T> StartAsync();
-        event Action<int> OnFihish;
+        event Action<T> OnFihish;
     }
 }

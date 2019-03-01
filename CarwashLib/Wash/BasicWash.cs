@@ -6,7 +6,7 @@ namespace CarwashLib
 {
     class BasicWash : WashBase, IWash<BasicWash>
     {
-        public event Action<int> OnFihish;
+        public event Action<BasicWash> OnFihish;
 
         public Task<BasicWash> StartAsync()
         {
@@ -33,7 +33,7 @@ namespace CarwashLib
                             else if (this.Progress == 100)
                             {
                                 Car.CarStatus = CarStatus.Finished;
-                                OnFihish?.Invoke(Id);
+                                OnFihish?.Invoke(this);
                             }
 
                             Thread.Sleep(500);
