@@ -52,6 +52,12 @@
     <Compile Include="CarsInWash.Designer.cs">
       <DependentUpon>CarsInWash.cs</DependentUpon>
     </Compile>
+    <Compile Include="CarwashForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CarwashForm.Designer.cs">
+      <DependentUpon>CarwashForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vaskehaller.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CarwashForm.resx">
+      <DependentUpon>CarwashForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vaskehaller.resx">
       <DependentUpon>Vaskehaller.cs</DependentUpon>
     </EmbeddedResource>

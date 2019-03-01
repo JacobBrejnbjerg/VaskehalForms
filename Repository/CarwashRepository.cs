@@ -21,6 +21,11 @@ namespace Repository
 
         public static Carwash NewCarwash(string name)
         {
+            if (Carwashes.Any(c => c.Name == name))
+            {
+                return null;
+            }
+
             int id = 0;
 
             if (Carwashes.Count > 0)
@@ -36,6 +41,11 @@ namespace Repository
 
             Carwashes.Add(carwash);
             return carwash;
+        }
+
+        public static bool DeleteCarwash(string name)
+        {
+            return Carwashes.RemoveAll(c => c.Name == name) > 0;
         }
     }
 }

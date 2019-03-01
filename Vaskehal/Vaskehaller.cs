@@ -42,5 +42,14 @@ namespace Vaskehal
             // Selects newest item in combobox
             combo_Carwashes.SelectedIndex = combo_Carwashes.Items.Count - 1; 
         }
+
+        private void btn_DeleteCarwash_Click(object sender, EventArgs e)
+        {
+            Carwash carwash = (Carwash)combo_Carwashes.SelectedItem;
+            if (CarwashRepository.DeleteCarwash(carwash.Name))
+            {
+                UpdateComboCarwashes();
+            }
+        }
     }
 }

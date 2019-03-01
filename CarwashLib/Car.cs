@@ -8,6 +8,7 @@ namespace CarwashLib
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string CarPlate { get; set; }
         public CarStatus CarStatus { get; set; }
         public bool IsCollected
         {
