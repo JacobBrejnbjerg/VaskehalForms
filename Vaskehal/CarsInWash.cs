@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Vaskehal
 {
-    public partial class Form1 : Form
+    public partial class CarsInWash : Form
     {
-        public Form1()
+        public CarsInWash()
         {
             InitializeComponent();
         }

@@ -46,14 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="CarsInWash.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CarsInWash.Designer.cs">
+      <DependentUpon>CarsInWash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vaskehaller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vaskehaller.Designer.cs">
+      <DependentUpon>Vaskehaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Vaskehaller.resx">
+      <DependentUpon>Vaskehaller.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -75,6 +84,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CarwashLib\CarwashLib.csproj">
+      <Project>{94242FEA-D456-4E87-A4C7-DC19CE02130B}</Project>
+      <Name>CarwashLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{EA0B150F-12C7-4031-97C4-D25EF1CDC706}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
