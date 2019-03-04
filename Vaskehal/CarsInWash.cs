@@ -54,8 +54,7 @@ namespace Vaskehal
                 ProgressBar progressBar = new ProgressBar();
                 progressBar.Minimum = 0;
                 progressBar.Maximum = 101;
-                progressBar.Width = 500;
-                //progressBar.Margin = new Padding(100, 0, 0, 0);
+                progressBar.Width = 300;
                 progressBar.Value = wash.Progress;
 
                 Button button = new Button();
@@ -67,6 +66,7 @@ namespace Vaskehal
                 panelLower.Controls.Add(button);
                 panelLower.Controls.Add(progressBar);
 
+                // Adds the panels to the flowpanel
                 flowpanel_Washes.Controls.Add(panelUpper);
                 flowpanel_Washes.Controls.Add(panelLower);
             }

@@ -41,7 +41,11 @@ namespace CarwashLib
                         for (; this.Progress <= 100; this.Progress++)
                         {
                             if (cancelToken.IsCancellationRequested)
+                            {
+                                // Fjerner bilen fra oversigten. Den er også collected-ish på en måde.
+                                Car.CarStatus = CarStatus.Collected;
                                 break;
+                            }
 
                             if (this.Progress < 25)
                             {
@@ -59,10 +63,6 @@ namespace CarwashLib
                             {
                                 Car.CarStatus = CarStatus.Finished;
                                 OnFihish?.Invoke(this);
-                            }
-                            else if (this.Progress > 100)
-                            {
-                                this.Progress = 100;
                             }
 
                             Thread.Sleep(10);

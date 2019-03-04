@@ -38,7 +38,7 @@ namespace CarwashLib
                 {
                     if (Car.CarStatus != CarStatus.Finished)
                     {
-                        for (; this.Progress < 100; this.Progress++)
+                        for (; this.Progress <= 100; this.Progress++)
                         {
                             if (cancelToken.IsCancellationRequested)
                                 break;
