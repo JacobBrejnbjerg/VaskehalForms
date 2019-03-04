@@ -6,26 +6,19 @@ namespace CarwashLib.Wash
 {
     class WashFactory
     {
-        public static WashBase GetWash(WashSelector selector)
+        public static IWash GetWash(WashType selector, Car car, string collectPassword)
         {
-            WashBase wb;
             switch (selector)
             {
-                case WashSelector.Basic:
-                    wb = new BasicWash();
-                    break;
-                case WashSelector.Silver:
-                    wb = new SilverWash();
-                    break;
-                case WashSelector.Gold:
-                    wb = new GoldWash();
-                    break;
+                case WashType.Basic:
+                    return new BasicWash(car, collectPassword);
+                case WashType.Silver:
+                    return new SilverWash(car, collectPassword);
+                case WashType.Gold:
+                    return new GoldWash(car, collectPassword);
                 default:
-                    wb = null;
-                    break;
+                    return null;
             }
-
-            return wb;
         }
     }
 }

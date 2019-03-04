@@ -11,7 +11,6 @@ namespace CarwashLib.Wash
         int Id { get; set; }
         Car Car { get; set; }
         int Progress { get; set; }
-        string CollectPassword { get; set; }
         event Action<IWash> OnFihish;
 
         Car Collect(string password);

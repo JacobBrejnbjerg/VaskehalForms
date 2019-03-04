@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CarwashLib.Wash
 {
-    enum WashSelector
+    enum WashType
     {
         Basic = 1,
         Silver = 2,
