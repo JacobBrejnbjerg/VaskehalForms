@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarwashLib.Wash;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -6,19 +7,39 @@ using System.Threading.Tasks;
 
 namespace CarwashLib
 {
-    class GoldWash : WashBase, IWash<GoldWash>
+    class GoldWash : IWash
     {
-        public event Action<GoldWash> OnFihish;
+        public int Id { get; set; }
+        public Car Car { get; set; }
+        public int Progress { get; set; }
+        public string CollectPassword { get; set; }
+        CancellationTokenSource cts;
 
-        public Task<GoldWash> StartAsync()
+        public event Action<IWash> OnFihish;
+
+        public Car Collect(string password)
         {
-            return Task<BasicWash>.Run(() =>
+            if (password == CollectPassword)
             {
-                while (Car.CarStatus != CarStatus.Finished)
+                Car.CarStatus = CarStatus.Collected;
+                return Car;
+            }
+
+            return null;
+        }
+
+        public Task StartAsync()
+        {
+            return Task.Run(() =>
+            {
+                CancellationToken cancelToken = cts.Token;
+
+                if (Car.CarStatus != CarStatus.Finished)
                 {
-                    for (int i = 0; i < 100; i++)
+                    for (; Progress < 100; Progress++)
                     {
-                        Progress = i;
+                        if (cancelToken.IsCancellationRequested)
+                            break;
 
                         if (this.Progress < 15)
                         {
@@ -56,6 +77,11 @@ namespace CarwashLib
 
                 return this;
             });
+        }
+
+        public void Cancel()
+        {
+            cts.Cancel();
         }
     }
 }

@@ -1,47 +1,73 @@
-﻿using System;
+﻿using CarwashLib.Wash;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace CarwashLib
 {
-    class BasicWash : WashBase, IWash<BasicWash>
+    class BasicWash : IWash
     {
-        public event Action<BasicWash> OnFihish;
+        public int Id { get; set; }
+        public Car Car { get; set; }
+        public int Progress { get; set; }
+        public string CollectPassword { get; set; }
+        CancellationTokenSource cts;
 
-        public Task<BasicWash> StartAsync()
+        public event Action<IWash> OnFihish;
+
+        public Car Collect(string password)
         {
-            return Task<BasicWash>.Run(() =>
+            if (password == CollectPassword)
+            {
+                Car.CarStatus = CarStatus.Collected;
+                return Car;
+            }
+
+            return null;
+        }
+
+        public Task StartAsync()
+        {
+            return Task.Run(() =>
+            {
+                CancellationToken cancelToken = cts.Token;
+
+                if (Car.CarStatus != CarStatus.Finished)
                 {
-                    while (Car.CarStatus != CarStatus.Finished)
+                    for (; Progress < 100; Progress++)
                     {
-                        for (int i = 0; i < 100; i++)
+                        if (cancelToken.IsCancellationRequested)
+                            break;
+
+                        if (this.Progress < 25)
                         {
-                            Progress = i;
-
-                            if (this.Progress < 25)
-                            {
-                                Car.CarStatus = CarStatus.Preparing;
-                            }
-                            else if (this.Progress < 50)
-                            {
-                                Car.CarStatus = CarStatus.Washing;
-                            }
-                            else if (this.Progress < 75)
-                            {
-                                Car.CarStatus = CarStatus.Drying;
-                            }
-                            else if (this.Progress == 100)
-                            {
-                                Car.CarStatus = CarStatus.Finished;
-                                OnFihish?.Invoke(this);
-                            }
-
-                            Thread.Sleep(500);
+                            Car.CarStatus = CarStatus.Preparing;
                         }
-                    }
+                        else if (this.Progress < 50)
+                        {
+                            Car.CarStatus = CarStatus.Washing;
+                        }
+                        else if (this.Progress < 75)
+                        {
+                            Car.CarStatus = CarStatus.Drying;
+                        }
+                        else if (this.Progress == 100)
+                        {
+                            Car.CarStatus = CarStatus.Finished;
+                            OnFihish?.Invoke(this);
+                        }
 
-                    return this;
-                });
+                        Thread.Sleep(500);
+                    }
+                }
+
+                return this;
+            });
+        }
+
+        public void Cancel()
+        {
+            cts.Cancel();
         }
     }
 }

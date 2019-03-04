@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarwashLib
+namespace CarwashLib.Wash
 {
-    interface IWash<T>
+    public interface IWash
     {
-        Task<T> StartAsync();
-        event Action<T> OnFihish;
+        int Id { get; set; }
+        Car Car { get; set; }
+        int Progress { get; set; }
+        string CollectPassword { get; set; }
+        event Action<IWash> OnFihish;
+
+        Car Collect(string password);
+        Task StartAsync();
+        void Cancel();
     }
 }
