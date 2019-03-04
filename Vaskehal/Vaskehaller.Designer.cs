@@ -89,6 +89,7 @@
             this.btn_GoToCarwash.TabIndex = 5;
             this.btn_GoToCarwash.Text = "Go to";
             this.btn_GoToCarwash.UseVisualStyleBackColor = true;
+            this.btn_GoToCarwash.Click += new System.EventHandler(this.btn_GoToCarwash_Click);
             // 
             // btn_DeleteCarwash
             // 

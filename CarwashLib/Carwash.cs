@@ -11,6 +11,11 @@ namespace CarwashLib
         public string Name { get; set; }
         public List<IWash> Washes { get; set; }
 
+        public Carwash()
+        {
+            Washes = new List<IWash>();
+        }
+
         public override string ToString()
         {
             return this.Name;

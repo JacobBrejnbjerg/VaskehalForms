@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CarwashLib.Wash
 {
-    class WashFactory
+    public class WashFactory
     {
         public static IWash GetWash(WashType selector, Car car, string collectPassword)
         {

@@ -23,6 +23,7 @@ namespace Vaskehal
         private void button1_Click(object sender, EventArgs e)
         {
             CarwashRepository.NewCarwash(tbox_CarwashName.Text);
+            tbox_CarwashName.Text = "";
             UpdateComboCarwashes();
         }
 
@@ -50,6 +51,15 @@ namespace Vaskehal
             {
                 UpdateComboCarwashes();
             }
+        }
+
+        private void btn_GoToCarwash_Click(object sender, EventArgs e)
+        {
+            string carwashName = combo_Carwashes.Text;
+            Carwash carwash = CarwashRepository.GetCarwashByName(carwashName);
+            CarwashForm form = new CarwashForm(carwash.Id);
+            form.Show();
+            this.Hide();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace CarwashLib.Wash
 
         public BaseWash(string collectPassword)
         {
+            cts = new CancellationTokenSource();
             salt = Hash.GenerateSalt();
             CollectPassword = Hash.HashPasswordWithSalt(collectPassword, salt, amountOfRepitions);
         }

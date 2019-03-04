@@ -1,4 +1,5 @@
 ﻿using CarwashLib;
+using CarwashLib.Wash;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,12 @@ namespace Repository
 
         public static Carwash GetCarwash(int id)
         {
-            return Carwashes.Find(v => v.Id == id);
+            return Carwashes.Find(c => c.Id == id);
+        }
+
+        public static Carwash GetCarwashByName(string name)
+        {
+            return Carwashes.Find(c => c.Name == name);
         }
 
         public static Carwash NewCarwash(string name)
@@ -30,7 +36,7 @@ namespace Repository
 
             if (Carwashes.Count > 0)
             {
-                id = Carwashes.Max(v => v.Id);
+                id = Carwashes.Max(c => c.Id) + 1;
             }
 
             Carwash carwash = new Carwash()
@@ -46,6 +52,12 @@ namespace Repository
         public static bool DeleteCarwash(string name)
         {
             return Carwashes.RemoveAll(c => c.Name == name) > 0;
+        }
+
+        public static void AddWash(int carwashId, IWash wash)
+        {
+            Carwash carwash = GetCarwash(carwashId);
+            carwash.Washes.Add(wash);
         }
     }
 }

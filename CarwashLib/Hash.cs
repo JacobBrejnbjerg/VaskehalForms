@@ -43,10 +43,20 @@ namespace CarwashLib
                 hash = sha256.ComputeHash(Combine(toBeHashed, salt));
             }
 
-            if (amountOfRepitions == 0)
+            return HashPasswordWithSalt(ref hash, salt, --amountOfRepitions);
+        }
+
+        private static byte[] HashPasswordWithSalt(ref byte[] hash, byte[] salt, int amountOfRepitions)
+        {
+            if (amountOfRepitions <= 0)
                 return hash;
 
-            return HashPasswordWithSalt(hash, salt, amountOfRepitions--);
+            using (var sha256 = SHA256.Create())
+            {
+                hash = sha256.ComputeHash(Combine(hash, salt));
+            }
+
+            return HashPasswordWithSalt(ref hash, salt, --amountOfRepitions);
         }
     }
 }
