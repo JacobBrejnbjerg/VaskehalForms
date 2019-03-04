@@ -66,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CarsInWash.resx">
+      <DependentUpon>CarsInWash.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CarwashForm.resx">
       <DependentUpon>CarwashForm.cs</DependentUpon>
     </EmbeddedResource>

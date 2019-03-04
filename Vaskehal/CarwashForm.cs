@@ -1,16 +1,10 @@
 ﻿using CarwashLib;
 using CarwashLib.Wash;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CarwashLib.Wash;
 using Repository;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Vaskehal
 {
@@ -40,6 +34,11 @@ namespace Vaskehal
             // Gets the correct wash using WashType and WashFactory.
             IWash wash = WashFactory.GetWash((WashType)cbox_WashType.SelectedItem, car, tbox_WashCollectPassword.Text);
 
+            // Gets current washes
+            List<IWash> washes = CarwashRepository.GetCarwash(_carwashId).Washes;
+            // Finds new ID using the highest ID + 1
+            wash.Id = (washes.Count > 0) ? washes.Max(w => w.Id) + 1 : 0;
+
             if (checkbox_WashNotification.Checked)
             {
                 wash.OnFihish += Notification.ShowNotification;
@@ -62,7 +61,9 @@ namespace Vaskehal
 
         private void btn_CurrentWashes_Click(object sender, EventArgs e)
         {
-
+            CarsInWash form = new CarsInWash(_carwashId);
+            form.Show();
+            this.Hide();
         }
 
         private void btn_GoBack_Click(object sender, EventArgs e)

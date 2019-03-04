@@ -60,8 +60,12 @@ namespace CarwashLib
                                 Car.CarStatus = CarStatus.Finished;
                                 OnFihish?.Invoke(this);
                             }
+                            else if (this.Progress > 100)
+                            {
+                                this.Progress = 100;
+                            }
 
-                            Thread.Sleep(500);
+                            Thread.Sleep(10);
                         }
                     }
                 }
