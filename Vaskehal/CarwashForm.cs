@@ -57,6 +57,7 @@ namespace Vaskehal
             tbox_CarPlate.Text = "";
             tbox_CarName.Text = "";
             tbox_WashCollectPassword.Text = "";
+            checkbox_WashNotification.Checked = false;
         }
 
         private void btn_CurrentWashes_Click(object sender, EventArgs e)
