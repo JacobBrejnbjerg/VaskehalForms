@@ -19,7 +19,7 @@ namespace CarwashLib
 
         public Car Collect(string password)
         {
-            if (Hash.HashPasswordWithSalt(password, salt) == CollectPassword)
+            if (Hash.HashPasswordWithSalt(password, salt, amountOfRepitions) == CollectPassword)
             {
                 Car.CarStatus = CarStatus.Collected;
                 return Car;

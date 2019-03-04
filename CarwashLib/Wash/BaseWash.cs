@@ -10,11 +10,12 @@ namespace CarwashLib.Wash
         protected CancellationTokenSource cts;
         protected readonly byte[] CollectPassword;
         protected readonly byte[] salt;
+        protected readonly int amountOfRepitions = 5;
 
         public BaseWash(string collectPassword)
         {
             salt = Hash.GenerateSalt();
-            CollectPassword = Hash.HashPasswordWithSalt(collectPassword, salt);
+            CollectPassword = Hash.HashPasswordWithSalt(collectPassword, salt, amountOfRepitions);
         }
     }
 }

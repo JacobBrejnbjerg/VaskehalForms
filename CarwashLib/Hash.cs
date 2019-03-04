@@ -29,17 +29,24 @@ namespace CarwashLib
             return ret;
         }
 
-        public static byte[] HashPasswordWithSalt(string toBeHashed, byte[] salt)
+        public static byte[] HashPasswordWithSalt(string toBeHashed, byte[] salt, int amountOfRepitions)
         {
-            return HashPasswordWithSalt(Encoding.UTF8.GetBytes(toBeHashed), salt);
+            return HashPasswordWithSalt(Encoding.UTF8.GetBytes(toBeHashed), salt, amountOfRepitions);
         }
 
-        public static byte[] HashPasswordWithSalt(byte[] toBeHashed, byte[] salt)
+        public static byte[] HashPasswordWithSalt(byte[] toBeHashed, byte[] salt, int amountOfRepitions)
         {
+            byte[] hash;
+
             using (var sha256 = SHA256.Create())
             {
-                return sha256.ComputeHash(Combine(toBeHashed, salt));
+                hash = sha256.ComputeHash(Combine(toBeHashed, salt));
             }
+
+            if (amountOfRepitions == 0)
+                return hash;
+
+            return HashPasswordWithSalt(hash, salt, amountOfRepitions--);
         }
     }
 }
