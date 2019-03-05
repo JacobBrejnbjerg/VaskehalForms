@@ -15,7 +15,7 @@ namespace CarwashLib.Wash
         event Action<IWash> OnProgressChange;
 
         Car Collect(string password);
-        Task StartAsync();
+        void StartAsync();
         void Cancel();
     }
 }

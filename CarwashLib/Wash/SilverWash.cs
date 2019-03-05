@@ -39,9 +39,9 @@ namespace CarwashLib
             return null;
         }
 
-        public Task StartAsync()
+        public void StartAsync()
         {
-            return Task.Run(() =>
+            new Thread(() =>
             {
                 CancellationToken cancelToken = cts.Token;
 
@@ -80,9 +80,7 @@ namespace CarwashLib
                         }
                     }
                 }
-
-                return this;
-            });
+            }).Start();
         }
 
         public void Cancel()
