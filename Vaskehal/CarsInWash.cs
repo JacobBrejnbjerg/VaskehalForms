@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,18 +17,18 @@ namespace Vaskehal
     public partial class CarsInWash : Form
     {
         private int _carwashId;
+        private SynchronizationContext uiCtx;
 
         public CarsInWash(int carwashId)
         {
             _carwashId = carwashId;
+            uiCtx = SynchronizationContext.Current;
             InitializeComponent();
             DisplayWashes();
         }
 
         private void DisplayWashes()
         {
-            //flowpanel_Washes.AutoSize = true;
-            //flowpanel_Washes.AutoSizeMode = AutoSizeMode.GrowOnly;
             flowpanel_Washes.FlowDirection = FlowDirection.TopDown;
 
             // Gets current washes where car is not collected
@@ -38,23 +39,29 @@ namespace Vaskehal
             // Handles the layout
             foreach (IWash wash in washes)
             {
-                Panel panelUpper = new Panel();
+                FlowLayoutPanel panelUpper = new FlowLayoutPanel();
+                panelUpper.AutoSize = true;
                 panelUpper.Height = 15;
 
-                Label label = new Label();
-                label.Text = $"{wash.Car.Name} {wash.Car.CarPlate} - {Enum.GetName(typeof(CarStatus), wash.Car.CarStatus)}";
+                Label carName = new Label();
+                carName.Text = $"{wash.Car.Name} {wash.Car.CarPlate}";
 
-                // Adds the label to the panel
-                panelUpper.Controls.Add(label);
+                Label carStatus = new Label();
+                carStatus.Text = Enum.GetName(typeof(CarStatus), wash.Car.CarStatus);
 
-                Panel panelLower = new Panel();
+                // Adds the labels to panelUpper
+                panelUpper.Controls.Add(carName);
+                panelUpper.Controls.Add(carStatus);
+
+                FlowLayoutPanel panelLower = new FlowLayoutPanel();
+                panelLower.AutoSize = true;
                 panelLower.Height = 25;
                 panelLower.Margin = new Padding(0, 0, 0, 20);
 
                 ProgressBar progressBar = new ProgressBar();
                 progressBar.Minimum = 0;
                 progressBar.Maximum = 101;
-                progressBar.Width = 300;
+                progressBar.Width = 150;
                 progressBar.Value = wash.Progress;
 
                 Button button = new Button();
@@ -69,6 +76,12 @@ namespace Vaskehal
                 // Adds the panels to the flowpanel
                 flowpanel_Washes.Controls.Add(panelUpper);
                 flowpanel_Washes.Controls.Add(panelLower);
+
+                wash.OnProgressChange += (IWash currWash) => 
+                {
+                    uiCtx.Send(_ => carStatus.Text = Enum.GetName(typeof(CarStatus), currWash.Car.CarStatus), null);
+                    uiCtx.Send(_ => progressBar.Value = currWash.Progress, null);
+                };
             }
         }
 

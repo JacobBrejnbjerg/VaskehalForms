@@ -12,6 +12,7 @@ namespace CarwashLib.Wash
         Car Car { get; set; }
         int Progress { get; set; }
         event Action<IWash> OnFihish;
+        event Action<IWash> OnProgressChange;
 
         Car Collect(string password);
         Task StartAsync();

@@ -38,7 +38,7 @@
             this.flowpanel_Washes.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowpanel_Washes.Location = new System.Drawing.Point(12, 42);
             this.flowpanel_Washes.Name = "flowpanel_Washes";
-            this.flowpanel_Washes.Size = new System.Drawing.Size(220, 194);
+            this.flowpanel_Washes.Size = new System.Drawing.Size(312, 194);
             this.flowpanel_Washes.TabIndex = 0;
             // 
             // btn_GoBack
@@ -55,7 +55,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 248);
+            this.ClientSize = new System.Drawing.Size(336, 248);
             this.Controls.Add(this.btn_GoBack);
             this.Controls.Add(this.flowpanel_Washes);
             this.Name = "CarsInWash";

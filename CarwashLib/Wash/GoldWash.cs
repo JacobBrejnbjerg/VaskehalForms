@@ -10,8 +10,18 @@ namespace CarwashLib
     {
         public int Id { get; set; }
         public Car Car { get; set; }
-        public int Progress { get; set; }
+        private int _progress = 0;
+        public int Progress
+        {
+            get => _progress;
+            set
+            {
+                _progress = value;
+                OnProgressChange?.Invoke(this);
+            }
+        }
         public event Action<IWash> OnFihish;
+        public event Action<IWash> OnProgressChange;
 
         public GoldWash(Car car, string collectPassword) : base(collectPassword)
         {
