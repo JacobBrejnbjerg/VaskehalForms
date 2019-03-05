@@ -76,7 +76,7 @@ namespace CarwashLib
                                 OnFihish?.Invoke(this);
                             }
 
-                            Thread.Sleep(500);
+                            Thread.Sleep(250);
                         }
                     }
                 }
