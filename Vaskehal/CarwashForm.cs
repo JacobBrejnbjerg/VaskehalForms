@@ -19,7 +19,9 @@ namespace Vaskehal
             InitializeComponent();
 
             InitializeWashTypes();
-            lbl_CarwashName.Text = CarwashRepository.GetCarwash(carwashId).Name;
+            string carwashName = CarwashRepository.GetCarwash(carwashId).Name;
+            this.Text = carwashName;
+            lbl_CarwashName.Text = carwashName;
         }
 
         private void InitializeWashTypes()
