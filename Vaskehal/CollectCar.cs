@@ -1,4 +1,4 @@
-﻿using CarwashLib.Wash;
+﻿using CarwashLib;
 using System;
 using System.Windows.Forms;
 
@@ -6,9 +6,9 @@ namespace Vaskehal
 {
     public partial class CollectCar : Form
     {
-        private readonly IWash _wash;
+        private readonly Wash _wash;
 
-        public CollectCar(IWash wash)
+        public CollectCar(Wash wash)
         {
             _wash = wash;
             InitializeComponent();

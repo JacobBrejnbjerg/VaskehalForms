@@ -1,6 +1,6 @@
 ﻿using CarwashLib;
 using CarwashLib.Cryptography;
-using CarwashLib.Wash;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +16,7 @@ namespace Repository
             Carwash carwash = CarwashRepository.GetCarwash(carwashId);
             statistics.TotalWashes = carwash.Washes.Count;
 
-            foreach (IWash wash in carwash.Washes)
+            foreach (Wash wash in carwash.Washes)
             {
                 if (wash is BasicWash)
                     statistics.BasicWashes++;

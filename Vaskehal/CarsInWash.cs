@@ -1,5 +1,5 @@
 ﻿using CarwashLib;
-using CarwashLib.Wash;
+
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -33,12 +33,12 @@ namespace Vaskehal
 
             // Gets current washes where car is not collected
             Carwash carwash = CarwashRepository.GetCarwash(_carwashId);
-            List<IWash> washes = carwash.Washes
+            List<Wash> washes = carwash.Washes
                 .Where(w => w.Car.IsCollected == false)
                 .ToList();
 
             // Handles the layout
-            foreach (IWash wash in washes)
+            foreach (Wash wash in washes)
             {
                 FlowLayoutPanel panelUpper = new FlowLayoutPanel();
                 panelUpper.AutoSize = true;
@@ -85,7 +85,7 @@ namespace Vaskehal
                 flowpanel_Washes.Controls.Add(panelUpper);
                 flowpanel_Washes.Controls.Add(panelLower);
 
-                wash.OnProgressChange += (IWash currWash) => 
+                wash.OnProgressChange += (Wash currWash) => 
                 {
                     uiCtx.Send(_ => carStatus.Text = Enum.GetName(typeof(CarStatus), currWash.Car.CarStatus), null);
                     uiCtx.Send(_ => progressBar.Value = currWash.Progress, null);
@@ -103,7 +103,7 @@ namespace Vaskehal
             Button button = (Button)sender;
             int washId = Convert.ToInt32(button.Name);
 
-            IWash wash = CarwashRepository.GetCarwash(_carwashId).Washes
+            Wash wash = CarwashRepository.GetCarwash(_carwashId).Washes
                                     .SingleOrDefault(w => w.Id == washId);
 
             if (wash != null)
@@ -121,7 +121,7 @@ namespace Vaskehal
             Button button = (Button)sender;
             int washId = Convert.ToInt32(button.Name);
 
-            IWash wash = CarwashRepository.GetCarwash(_carwashId).Washes
+            Wash wash = CarwashRepository.GetCarwash(_carwashId).Washes
                                     .SingleOrDefault(w => w.Id == washId);
 
             if (wash != null)

@@ -1,5 +1,5 @@
 ﻿using CarwashLib;
-using CarwashLib.Wash;
+
 using System;
 using System.Windows.Forms;
 using Repository;
@@ -36,10 +36,10 @@ namespace Vaskehal
             car.Name = tbox_CarName.Text;
 
             // Gets the correct wash using WashType and WashFactory.
-            IWash wash = WashFactory.GetWash((WashType)cbox_WashType.SelectedItem, car, tbox_WashCollectPassword.Text);
+            Wash wash = WashFactory.GetWash((WashType)cbox_WashType.SelectedItem, car, tbox_WashCollectPassword.Text);
 
             // Gets current washes
-            List<IWash> washes = CarwashRepository.GetCarwash(_carwashId).Washes;
+            List<Wash> washes = CarwashRepository.GetCarwash(_carwashId).Washes;
             // Finds new ID using the highest ID + 1
             wash.Id = (washes.Count > 0) ? washes.Max(w => w.Id) + 1 : 0;
 

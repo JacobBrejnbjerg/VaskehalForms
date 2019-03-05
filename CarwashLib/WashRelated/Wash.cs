@@ -1,16 +1,27 @@
-﻿using CarwashLib.Wash;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace CarwashLib
 {
-    public class GoldWash : BaseWash, IWash
+    public abstract class Wash
     {
+        #region Cryptography
+        // Protected makes it safer, as only derived classes can see them.
+        protected CancellationTokenSource cts;
+        protected readonly byte[] CollectPassword;
+        protected readonly byte[] salt;
+        protected readonly int amountOfRepitions = 5;
+        #endregion
+
+
+        // Wash specific information
         public int Id { get; set; }
         public Car Car { get; set; }
+        public event Action<Wash> OnFihish;
+        public event Action<Wash> OnProgressChange;
         private int _progress = 0;
         public int Progress
         {
@@ -21,15 +32,15 @@ namespace CarwashLib
                 OnProgressChange?.Invoke(this);
             }
         }
-        public event Action<IWash> OnFihish;
-        public event Action<IWash> OnProgressChange;
 
-        public GoldWash(Car car, string collectPassword) : base(collectPassword)
+        public Wash(string collectPassword)
         {
-            Car = car;  
+            cts = new CancellationTokenSource();
+            salt = Hash.GenerateSalt();
+            CollectPassword = Hash.HashPasswordWithSalt(collectPassword, salt, amountOfRepitions);
         }
 
-        public Car Collect(string password)
+        public virtual Car Collect(string password)
         {
             if (Hash.HashPasswordWithSalt(password, salt, amountOfRepitions).SequenceEqual(CollectPassword))
             {
@@ -40,7 +51,22 @@ namespace CarwashLib
             return null;
         }
 
-        public void StartAsync()
+        public virtual void Cancel()
+        {
+            cts.Cancel();
+        }
+
+        protected void InvokeOnFinish(Wash wash)
+        {
+            OnFihish?.Invoke(wash);
+        }
+
+        protected void InvokeOnProgressChange(Wash wash)
+        {
+            OnProgressChange?.Invoke(wash);
+        }
+
+        public virtual void StartAsync()
         {
             new Thread(() =>
             {
@@ -53,36 +79,28 @@ namespace CarwashLib
                         for (; this.Progress < 100; this.Progress++)
                         {
                             if (cancelToken.IsCancellationRequested)
+                            {
+                                // Fjerner bilen fra oversigten. Den er også collected-ish på en måde.
+                                Car.CarStatus = CarStatus.Collected;
                                 break;
+                            }
 
-                            if (this.Progress < 15)
+                            if (this.Progress < 25)
                             {
                                 Car.CarStatus = CarStatus.Preparing;
                             }
-                            else if (this.Progress < 30)
-                            {
-                                Car.CarStatus = CarStatus.Soaping;
-                            }
-                            else if (this.Progress < 45)
-                            {
-                                Car.CarStatus = CarStatus.Unterwagen;
-                            }
-                            else if (this.Progress < 60)
-                            {
-                                Car.CarStatus = CarStatus.Waxing;
-                            }
-                            else if (this.Progress < 75)
+                            else if (this.Progress < 50)
                             {
                                 Car.CarStatus = CarStatus.Washing;
                             }
-                            else if (this.Progress < 90)
+                            else if (this.Progress < 75)
                             {
                                 Car.CarStatus = CarStatus.Drying;
                             }
                             else if (this.Progress == 99)
                             {
                                 Car.CarStatus = CarStatus.Finished;
-                                OnFihish?.Invoke(this);
+                                InvokeOnFinish(this);
                             }
 
                             Thread.Sleep(250);
@@ -90,11 +108,6 @@ namespace CarwashLib
                     }
                 }
             }).Start();
-        }
-
-        public void Cancel()
-        {
-            cts.Cancel();
         }
     }
 }

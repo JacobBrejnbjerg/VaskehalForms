@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarwashLib.Wash
+namespace CarwashLib
 {
     public class WashFactory
     {
-        public static IWash GetWash(WashType selector, Car car, string collectPassword)
+        public static Wash GetWash(WashType selector, Car car, string collectPassword)
         {
             switch (selector)
             {

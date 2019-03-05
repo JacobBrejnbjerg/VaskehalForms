@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarwashLib.Wash
+namespace CarwashLib
 {
     public enum WashType
     {

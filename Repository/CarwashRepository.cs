@@ -1,5 +1,5 @@
 ﻿using CarwashLib;
-using CarwashLib.Wash;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +55,7 @@ namespace Repository
             return Carwashes.RemoveAll(c => c.Name == name) > 0;
         }
 
-        public static void AddWash(int carwashId, IWash wash)
+        public static void AddWash(int carwashId, Wash wash)
         {
             Carwash carwash = GetCarwash(carwashId);
             carwash.Washes.Add(wash);
