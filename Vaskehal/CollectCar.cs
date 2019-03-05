@@ -1,12 +1,5 @@
 ﻿using CarwashLib.Wash;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Vaskehal
@@ -27,6 +20,7 @@ namespace Vaskehal
             {
                 // Hides the form
                 this.Hide();
+                _wash.Car.CarStatus = CarwashLib.CarStatus.Collected;
             }
             else
             {
