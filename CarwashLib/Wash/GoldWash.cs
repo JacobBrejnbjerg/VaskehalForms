@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarwashLib
 {
-    class GoldWash : BaseWash, IWash
+    public class GoldWash : BaseWash, IWash
     {
         public int Id { get; set; }
         public Car Car { get; set; }

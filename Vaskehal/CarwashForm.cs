@@ -72,5 +72,11 @@ namespace Vaskehal
             form.Show();
             this.Hide();
         }
+
+        private void btn_Statistics_Click(object sender, EventArgs e)
+        {
+            StatisticsForm form = new StatisticsForm(_carwashId);
+            form.ShowDialog();
+        }
     }
 }

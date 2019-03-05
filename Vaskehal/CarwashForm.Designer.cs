@@ -30,12 +30,12 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbox_WashType = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbox_WashCollectPassword = new System.Windows.Forms.TextBox();
             this.checkbox_WashNotification = new System.Windows.Forms.CheckBox();
+            this.tbox_WashCollectPassword = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbox_WashType = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbox_CarName = new System.Windows.Forms.TextBox();
             this.lbl_Plate = new System.Windows.Forms.Label();
@@ -44,6 +44,7 @@
             this.btn_StartWash = new System.Windows.Forms.Button();
             this.btn_CurrentWashes = new System.Windows.Forms.Button();
             this.btn_GoBack = new System.Windows.Forms.Button();
+            this.btn_Statistics = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -70,31 +71,22 @@
             this.panel2.Size = new System.Drawing.Size(305, 116);
             this.panel2.TabIndex = 3;
             // 
-            // label3
+            // checkbox_WashNotification
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(183, 115);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Wash";
+            this.checkbox_WashNotification.AutoSize = true;
+            this.checkbox_WashNotification.Location = new System.Drawing.Point(153, 25);
+            this.checkbox_WashNotification.Name = "checkbox_WashNotification";
+            this.checkbox_WashNotification.Size = new System.Drawing.Size(147, 17);
+            this.checkbox_WashNotification.TabIndex = 5;
+            this.checkbox_WashNotification.Text = "Notification when finished";
+            this.checkbox_WashNotification.UseVisualStyleBackColor = true;
             // 
-            // cbox_WashType
+            // tbox_WashCollectPassword
             // 
-            this.cbox_WashType.FormattingEnabled = true;
-            this.cbox_WashType.Location = new System.Drawing.Point(7, 25);
-            this.cbox_WashType.Name = "cbox_WashType";
-            this.cbox_WashType.Size = new System.Drawing.Size(121, 21);
-            this.cbox_WashType.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 9);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Type";
+            this.tbox_WashCollectPassword.Location = new System.Drawing.Point(7, 77);
+            this.tbox_WashCollectPassword.Name = "tbox_WashCollectPassword";
+            this.tbox_WashCollectPassword.Size = new System.Drawing.Size(118, 20);
+            this.tbox_WashCollectPassword.TabIndex = 3;
             // 
             // label5
             // 
@@ -105,22 +97,31 @@
             this.label5.TabIndex = 2;
             this.label5.Text = "Collect password";
             // 
-            // tbox_WashCollectPassword
+            // label4
             // 
-            this.tbox_WashCollectPassword.Location = new System.Drawing.Point(7, 77);
-            this.tbox_WashCollectPassword.Name = "tbox_WashCollectPassword";
-            this.tbox_WashCollectPassword.Size = new System.Drawing.Size(118, 20);
-            this.tbox_WashCollectPassword.TabIndex = 3;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Type";
             // 
-            // checkbox_WashNotification
+            // cbox_WashType
             // 
-            this.checkbox_WashNotification.AutoSize = true;
-            this.checkbox_WashNotification.Location = new System.Drawing.Point(153, 25);
-            this.checkbox_WashNotification.Name = "checkbox_WashNotification";
-            this.checkbox_WashNotification.Size = new System.Drawing.Size(147, 17);
-            this.checkbox_WashNotification.TabIndex = 5;
-            this.checkbox_WashNotification.Text = "Notification when finished";
-            this.checkbox_WashNotification.UseVisualStyleBackColor = true;
+            this.cbox_WashType.FormattingEnabled = true;
+            this.cbox_WashType.Location = new System.Drawing.Point(7, 25);
+            this.cbox_WashType.Name = "cbox_WashType";
+            this.cbox_WashType.Size = new System.Drawing.Size(121, 21);
+            this.cbox_WashType.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(183, 115);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Wash";
             // 
             // label2
             // 
@@ -196,11 +197,22 @@
             this.btn_GoBack.UseVisualStyleBackColor = true;
             this.btn_GoBack.Click += new System.EventHandler(this.btn_GoBack_Click);
             // 
+            // btn_Statistics
+            // 
+            this.btn_Statistics.Location = new System.Drawing.Point(197, 12);
+            this.btn_Statistics.Name = "btn_Statistics";
+            this.btn_Statistics.Size = new System.Drawing.Size(75, 23);
+            this.btn_Statistics.TabIndex = 8;
+            this.btn_Statistics.Text = "Statistics";
+            this.btn_Statistics.UseVisualStyleBackColor = true;
+            this.btn_Statistics.Click += new System.EventHandler(this.btn_Statistics_Click);
+            // 
             // CarwashForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 265);
+            this.Controls.Add(this.btn_Statistics);
             this.Controls.Add(this.btn_GoBack);
             this.Controls.Add(this.btn_CurrentWashes);
             this.Controls.Add(this.btn_StartWash);
@@ -236,5 +248,6 @@
         private System.Windows.Forms.Button btn_StartWash;
         private System.Windows.Forms.Button btn_CurrentWashes;
         private System.Windows.Forms.Button btn_GoBack;
+        private System.Windows.Forms.Button btn_Statistics;
     }
 }
