@@ -45,6 +45,7 @@
             this.btn_CurrentWashes = new System.Windows.Forms.Button();
             this.btn_GoBack = new System.Windows.Forms.Button();
             this.btn_Statistics = new System.Windows.Forms.Button();
+            this.lbl_CarwashName = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -169,7 +170,7 @@
             // 
             // btn_StartWash
             // 
-            this.btn_StartWash.Location = new System.Drawing.Point(15, 13);
+            this.btn_StartWash.Location = new System.Drawing.Point(15, 12);
             this.btn_StartWash.Name = "btn_StartWash";
             this.btn_StartWash.Size = new System.Drawing.Size(75, 23);
             this.btn_StartWash.TabIndex = 5;
@@ -207,11 +208,22 @@
             this.btn_Statistics.UseVisualStyleBackColor = true;
             this.btn_Statistics.Click += new System.EventHandler(this.btn_Statistics_Click);
             // 
+            // lbl_CarwashName
+            // 
+            this.lbl_CarwashName.AutoSize = true;
+            this.lbl_CarwashName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_CarwashName.Location = new System.Drawing.Point(278, 12);
+            this.lbl_CarwashName.Name = "lbl_CarwashName";
+            this.lbl_CarwashName.Size = new System.Drawing.Size(90, 25);
+            this.lbl_CarwashName.TabIndex = 9;
+            this.lbl_CarwashName.Text = "Carwash";
+            // 
             // CarwashForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 265);
+            this.Controls.Add(this.lbl_CarwashName);
             this.Controls.Add(this.btn_Statistics);
             this.Controls.Add(this.btn_GoBack);
             this.Controls.Add(this.btn_CurrentWashes);
@@ -249,5 +261,6 @@
         private System.Windows.Forms.Button btn_CurrentWashes;
         private System.Windows.Forms.Button btn_GoBack;
         private System.Windows.Forms.Button btn_Statistics;
+        private System.Windows.Forms.Label lbl_CarwashName;
     }
 }
