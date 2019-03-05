@@ -58,6 +58,12 @@
     <Compile Include="CarwashForm.Designer.cs">
       <DependentUpon>CarwashForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CollectCar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CollectCar.Designer.cs">
+      <DependentUpon>CollectCar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vaskehaller.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +77,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CarwashForm.resx">
       <DependentUpon>CarwashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CollectCar.resx">
+      <DependentUpon>CollectCar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vaskehaller.resx">
       <DependentUpon>Vaskehaller.cs</DependentUpon>

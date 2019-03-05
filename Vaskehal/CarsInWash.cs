@@ -44,7 +44,7 @@ namespace Vaskehal
                 panelUpper.Height = 15;
 
                 Label carName = new Label();
-                carName.Text = $"{wash.Car.Name} {wash.Car.CarPlate}";
+                carName.Text = $"{wash.GetType().Name}: {wash.Car.Name} {wash.Car.CarPlate}";
 
                 Label carStatus = new Label();
                 carStatus.Text = Enum.GetName(typeof(CarStatus), wash.Car.CarStatus);
@@ -60,7 +60,7 @@ namespace Vaskehal
 
                 ProgressBar progressBar = new ProgressBar();
                 progressBar.Minimum = 0;
-                progressBar.Maximum = 101;
+                progressBar.Maximum = 100;
                 progressBar.Width = 150;
                 progressBar.Value = wash.Progress;
 
@@ -69,9 +69,16 @@ namespace Vaskehal
                 button.Click += Cancel_Clicked;
                 button.Name = wash.Id.ToString();
 
+                Button collect = new Button();
+                collect.Text = "Collect";
+                collect.Click += btn_Collect;
+                collect.Name = wash.Id.ToString();
+                collect.Enabled = (wash.Progress == 100) ? true : false;
+
                 // Adds the progressbar and button to the panelLower
                 panelLower.Controls.Add(button);
                 panelLower.Controls.Add(progressBar);
+                panelLower.Controls.Add(collect);
 
                 // Adds the panels to the flowpanel
                 flowpanel_Washes.Controls.Add(panelUpper);
@@ -81,6 +88,11 @@ namespace Vaskehal
                 {
                     uiCtx.Send(_ => carStatus.Text = Enum.GetName(typeof(CarStatus), currWash.Car.CarStatus), null);
                     uiCtx.Send(_ => progressBar.Value = currWash.Progress, null);
+
+                    if (currWash.Progress == 100)
+                    {
+                        uiCtx.Send(_ => collect.Enabled = true, null);
+                    }
                 };
             }
         }
@@ -96,6 +108,25 @@ namespace Vaskehal
             if (wash != null)
             {
                 wash.Cancel();
+            }
+            else
+            {
+                MessageBox.Show("Could not find a wash with the matching id");
+            }
+        }
+
+        private void btn_Collect(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int washId = Convert.ToInt32(button.Name);
+
+            IWash wash = CarwashRepository.GetCarwash(_carwashId).Washes
+                                    .SingleOrDefault(w => w.Id == washId);
+
+            if (wash != null)
+            {
+                CollectCar form = new CollectCar(wash);
+                form.ShowDialog();
             }
             else
             {

@@ -1,5 +1,6 @@
 ﻿using CarwashLib.Wash;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,7 +30,7 @@ namespace CarwashLib
 
         public Car Collect(string password)
         {
-            if (Hash.HashPasswordWithSalt(password, salt, amountOfRepitions) == CollectPassword)
+            if (Hash.HashPasswordWithSalt(password, salt, amountOfRepitions).SequenceEqual(CollectPassword))
             {
                 Car.CarStatus = CarStatus.Collected;
                 return Car;
@@ -48,7 +49,7 @@ namespace CarwashLib
                 {
                     if (Car.CarStatus != CarStatus.Finished)
                     {
-                        for (; this.Progress <= 100; this.Progress++)
+                        for (; this.Progress < 100; this.Progress++)
                         {
                             if (cancelToken.IsCancellationRequested)
                                 break;
@@ -69,7 +70,7 @@ namespace CarwashLib
                             {
                                 Car.CarStatus = CarStatus.Drying;
                             }
-                            else if (this.Progress == 100)
+                            else if (this.Progress == 99)
                             {
                                 Car.CarStatus = CarStatus.Finished;
                                 OnFihish?.Invoke(this);
