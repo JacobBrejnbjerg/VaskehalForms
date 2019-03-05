@@ -1,6 +1,7 @@
 ﻿using CarwashLib;
 using Repository;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Vaskehal
@@ -47,10 +48,10 @@ namespace Vaskehal
             }
         }
 
-        private void btn_GoToCarwash_Click(object sender, EventArgs e)
+        private async void btn_GoToCarwash_Click(object sender, EventArgs e)
         {
             string carwashName = combo_Carwashes.Text;
-            Carwash carwash = CarwashRepository.GetCarwashByName(carwashName);
+            Carwash carwash = await CarwashRepository.GetCarwashByNameAsync(carwashName);
             CarwashForm form = new CarwashForm(carwash.Id);
             form.Show();
             this.Hide();

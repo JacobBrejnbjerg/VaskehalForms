@@ -3,6 +3,7 @@ using CarwashLib.Wash;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -20,9 +21,9 @@ namespace Repository
             return Carwashes.Find(c => c.Id == id);
         }
 
-        public static Carwash GetCarwashByName(string name)
+        public static async Task<Carwash> GetCarwashByNameAsync(string name)
         {
-            return Carwashes.Find(c => c.Name == name);
+            return await Task.Run(() => Carwashes.Find(c => c.Name == name));
         }
 
         public static Carwash NewCarwash(string name)

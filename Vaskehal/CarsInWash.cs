@@ -27,12 +27,13 @@ namespace Vaskehal
             DisplayWashes();
         }
 
-        private void DisplayWashes()
+        private async Task DisplayWashes()
         {
             flowpanel_Washes.FlowDirection = FlowDirection.TopDown;
 
             // Gets current washes where car is not collected
-            List<IWash> washes = CarwashRepository.GetCarwash(_carwashId).Washes
+            Carwash carwash = CarwashRepository.GetCarwash(_carwashId);
+            List<IWash> washes = carwash.Washes
                 .Where(w => w.Car.IsCollected == false)
                 .ToList();
 
