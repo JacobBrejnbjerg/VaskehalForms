@@ -27,7 +27,7 @@ namespace Vaskehal
             DisplayWashes();
         }
 
-        private async Task DisplayWashes()
+        private void DisplayWashes()
         {
             flowpanel_Washes.FlowDirection = FlowDirection.TopDown;
 
