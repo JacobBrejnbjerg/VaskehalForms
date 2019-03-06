@@ -85,14 +85,23 @@ namespace Vaskehal
                 flowpanel_Washes.Controls.Add(panelUpper);
                 flowpanel_Washes.Controls.Add(panelLower);
 
-                wash.OnProgressChange += (Wash currWash) => 
+                wash.OnProgressChange += (int progress) => 
                 {
-                    uiCtx.Send(_ => carStatus.Text = Enum.GetName(typeof(CarStatus), currWash.Car.CarStatus), null);
-                    uiCtx.Send(_ => progressBar.Value = currWash.Progress, null);
+                    uiCtx.Send(_ => progressBar.Value = progress, null);
+                };
 
-                    if (currWash.Progress == 100)
+                wash.Car.OnCarStatusChanged += (CarStatus carstatus) =>
+                {
+                    uiCtx.Send(_ => carStatus.Text = Enum.GetName(typeof(CarStatus), carstatus), null);
+
+                    if (carstatus == CarStatus.Finished)
                     {
                         uiCtx.Send(_ => collect.Enabled = true, null);
+                    }
+                    else if (carstatus == CarStatus.Collected)
+                    {
+                        panelUpper.Controls.Clear();
+                        panelLower.Controls.Clear();
                     }
                 };
             }

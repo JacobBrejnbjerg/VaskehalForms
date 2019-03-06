@@ -21,7 +21,7 @@ namespace CarwashLib
         public int Id { get; set; }
         public Car Car { get; set; }
         public event Action<Wash> OnFihish;
-        public event Action<Wash> OnProgressChange;
+        public event Action<int> OnProgressChange;
         private int _progress = 0;
         public int Progress
         {
@@ -29,7 +29,7 @@ namespace CarwashLib
             set
             {
                 _progress = value;
-                OnProgressChange?.Invoke(this);
+                OnProgressChange?.Invoke(_progress);
             }
         }
 
@@ -61,9 +61,9 @@ namespace CarwashLib
             OnFihish?.Invoke(wash);
         }
 
-        protected void InvokeOnProgressChange(Wash wash)
+        protected void InvokeOnProgressChange(int prog)
         {
-            OnProgressChange?.Invoke(wash);
+            OnProgressChange?.Invoke(prog);
         }
 
         public virtual void StartAsync()
