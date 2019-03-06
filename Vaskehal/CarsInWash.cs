@@ -1,5 +1,4 @@
 ﻿using CarwashLib;
-
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -46,6 +45,7 @@ namespace Vaskehal
 
                 Label carName = new Label();
                 carName.Text = $"{wash.GetType().Name}: {wash.Car.Name} {wash.Car.CarPlate}";
+                carName.AutoSize = true;
 
                 Label carStatus = new Label();
                 carStatus.Text = Enum.GetName(typeof(CarStatus), wash.Car.CarStatus);
@@ -100,8 +100,8 @@ namespace Vaskehal
                     }
                     else if (carstatus == CarStatus.Collected)
                     {
-                        panelUpper.Controls.Clear();
-                        panelLower.Controls.Clear();
+                        uiCtx.Send(_ => panelUpper.Controls.Clear(), null);
+                        uiCtx.Send(_ => panelLower.Controls.Clear(), null);
                     }
                 };
             }
